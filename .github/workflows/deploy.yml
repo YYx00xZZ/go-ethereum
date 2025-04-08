@@ -30,6 +30,7 @@ jobs:
           mkdir -p geth_data
           docker run -d --name geth-service -p 8545:8545 -p 30303:30303 \
             -v "$(pwd)/geth_data:/root/.ethereum" yyx00xzz/geth-dev:latest \
+            geth \
             --dev \
             --http \
             --http-addr 0.0.0.0 \
