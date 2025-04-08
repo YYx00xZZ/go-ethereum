@@ -37,10 +37,10 @@ This is an example of an error they throw when ran against the Geth:
        Deployment
          Should fail if the unlockTime is not in the future:
      OnlyHardhatNetworkError: This helper can only be used with Hardhat Network. You are connected to 'geth'.
-      at checkIfDevelopmentNetwork (/Users/alexander/limechain/go-ethereum/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:30:11)
-      at getHardhatProvider (/Users/alexander/limechain/go-ethereum/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:41:9)
-      at async Object.latest (/Users/alexander/limechain/go-ethereum/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/helpers/time/latest.ts:7:20)
-      at async Context.<anonymous> (/Users/alexander/limechain/go-ethereum/hardhat/test/Lock.ts:54:26)
+      at checkIfDevelopmentNetwork (<obfustcated>/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:30:11)
+      at getHardhatProvider (<obfuscated>/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:41:9)
+      at async Object.latest (<obfuscated>/hardhat/node_modules/@nomicfoundation/hardhat-network-helpers/src/helpers/time/latest.ts:7:20)
+      at async Context.<anonymous> (<obfuscated>/hardhat/test/Lock.ts:54:26)
 ```
 I've provided the same tests reworked to be compatible with Geth.
 
