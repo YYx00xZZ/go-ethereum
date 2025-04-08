@@ -64,11 +64,12 @@ jobs:
           COPY geth_data /root/.ethereum
           EOF
 
-          docker build -t $IMAGE_NAME:with-contract-latest -t $IMAGE_NAME:with-contract-$COMMIT_SHA -f Dockerfile.with-contract .
+          docker build -t $IMAGE_NAME:with-contract-latest -t $IMAGE_NAME:with-contract-$COMMIT_SHA -f Dockerfile.with-contract
 
           rm Dockerfile.with-contract
 
+          docker images -a
       - name: push image
         run: |
-          docker push $IMAGE_NAME:latest
-          docker push $IMAGE_NAME:$COMMIT_SHA
+          docker push $IMAGE_NAME:with-contract-latest
+          docker push $IMAGE_NAME:with-contract-$COMMIT_SHA
