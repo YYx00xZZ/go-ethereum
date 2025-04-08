@@ -31,6 +31,9 @@ jobs:
           npx hardhat compile
           npx hardhat run scripts/deploy.ts --network geth
 
+      - name: get docker logs
+        run: docker compose -f docker-compose.yml logs
+
       - name: Shutdown services
         if: always()
         run: docker compose -f docker-compose.yml down
