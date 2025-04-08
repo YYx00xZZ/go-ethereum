@@ -44,6 +44,8 @@ This is an example of an error they throw when ran against the Geth:
 ```
 I've provided the same tests reworked to be compatible with Geth.
 
+When running the docker container with Geth, I do not use bind mount and I am making sure that the geth_data dir from previous steps is cleaned so I can be sure that I am working with the contract previously deployed in the container.
+
 ## Go Ethereum
 
 Golang execution layer implementation of the Ethereum protocol.
