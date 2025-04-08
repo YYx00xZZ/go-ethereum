@@ -1,14 +1,14 @@
 name: deploy
 
-on:
-  pull_request:
-    types: [closed]
-    branches: [master]
-    paths: ["**"]
+on: [push, pull_request]
+  # pull_request:
+  #   types: [closed]
+  #   branches: [master]
+  #   paths: ["**"]
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
+    # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
     runs-on: ubuntu-latest
 
     steps:
