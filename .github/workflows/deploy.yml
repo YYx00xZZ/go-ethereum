@@ -37,7 +37,13 @@ jobs:
             --http-api admin,debug,web3,eth,txpool,miner,net,dev \
             --miner.gasprice "1" \
             --http-corsdomain "*"
-          sleep 30
+          echo "Waiting for Geth to be ready..."
+          # Poll the Geth RPC endpoint until it's responsive
+          while ! curl -s -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}' http://localhost:8545 > /dev/null; do
+            echo "Geth not ready yet, waiting..."
+            sleep 5
+          done
+          echo "Geth is ready."
 
       - name: install hardhat deps
         run: |
