@@ -1,5 +1,6 @@
 ## DevOps docs
 All workflows are limited to PRs with target=master for the sake of simplicity in this demo.
+In the future, a feature should be implemented which allows to build images and deploy contracts from feature branches.
 
 ### Build
 When a PR with label CI:Build is merged in the master branch, a Docker image is build and pushed tagged with latest AND with the commit ID. This way you can refer to older version if needed but at the same time latest is available.
