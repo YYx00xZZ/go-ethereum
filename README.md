@@ -5,7 +5,13 @@ When a PR with label CI:Build is merged in the master branch, a Docker image is 
 !NB If you encounter a problem with pushing to the registry, check if the access token has not expired. It has 30 days expiration.
 
 ### Deploy
+Although hardhat ignition works perfectly with the hardhat network, there are issues when trying to deploy to Geth.
 
+To solve this, there is deploy script in `hardhat/scripts` dir which deploys the sample Lock contract to the blockchain.
+
+If you need to deploy the contract locally:
+1. cd to `hardhat` dir
+2. run `npx hardhat run scripts/deploy.ts --network geth`
 
 ## Go Ethereum
 
