@@ -23,7 +23,7 @@ jobs:
         id: vars
         run: |
           echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/geth-dev-wth-contract" >> $GITHUB_ENV
+          echo "IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/geth-dev" >> $GITHUB_ENV
 
       - name: start geth
         run: |
@@ -64,7 +64,7 @@ jobs:
           COPY geth_data /root/.ethereum
           EOF
 
-          docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$COMMIT_SHA -f Dockerfile.with-contract .
+          docker build -t $IMAGE_NAME:with-contract-latest -t $IMAGE_NAME:with-contract-$COMMIT_SHA -f Dockerfile.with-contract .
 
           rm Dockerfile.with-contract
 
