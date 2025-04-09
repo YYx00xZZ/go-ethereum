@@ -79,7 +79,10 @@ Required inputs:
 - `project_id`
 
 #### How to
-Prerequisite: Enable Service Usage API from GCP WEB UI
+Prerequisite:
+- Enable Service Usage API from GCP WEB UI
+- Cloud Resource Manager API
+
 1. Go to GCP WEB UI > IAM & Admin > Service Accounts;
 2. Create new Service Account with name `terraformer` and assign Owner role (for production this should be limited role, never use owner);
 3. Create new service account key and download it as JSON;

@@ -7,7 +7,6 @@ variable "api_service" {
   description = "List of strings. Contain API services to be enabled."
   type        = list(string)
   default = [
-    "cloudresourcemanager.googleapis.com",
     "servicenetworking.googleapis.com",
     "cloudbilling.googleapis.com",
     "autoscaling.googleapis.com",
