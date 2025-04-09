@@ -31,7 +31,6 @@ variable "api_service" {
     "pubsub.googleapis.com",
     "secretmanager.googleapis.com",
     "servicemanagement.googleapis.com",
-    "serviceusage.googleapis.com",
     "storage-api.googleapis.com",
     "storage-component.googleapis.com",
     "storage.googleapis.com",

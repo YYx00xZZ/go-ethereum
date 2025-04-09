@@ -79,6 +79,7 @@ Required inputs:
 - `project_id`
 
 #### How to
+Prerequisite: Enable Service Usage API from GCP WEB UI
 1. Go to GCP WEB UI > IAM & Admin > Service Accounts;
 2. Create new Service Account with name `terraformer` and assign Owner role (for production this should be limited role, never use owner);
 3. Create new service account key and download it as JSON;
@@ -89,6 +90,9 @@ Required inputs:
 8. Run `terraform apply`. Wait for the prompt or just add `-auto-approve` to automatically approve the action;
 9. Run `terraform destroy` after you are done with testing and messing around.
 ---
+
+### Deploy to k8s
+
 
 ## Go Ethereum
 
