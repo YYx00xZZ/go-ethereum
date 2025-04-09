@@ -79,6 +79,7 @@ Required inputs:
 - `project_id`
 
 #### How to
+Prerequisite: Enable Service Usage API from GCP WEB UI
 1. Go to GCP WEB UI > IAM & Admin > Service Accounts;
 2. Create new Service Account with name `terraformer` and assign Owner role (for production this should be limited role, never use owner);
 3. Create new service account key and download it as JSON;
@@ -88,6 +89,25 @@ Required inputs:
 7. Run `terraform plan` and revisit the plan output;
 8. Run `terraform apply`. Wait for the prompt or just add `-auto-approve` to automatically approve the action;
 9. Run `terraform destroy` after you are done with testing and messing around.
+
+### Deploy to k8s
+For the sake of simplicity I am giving steps to deploy the container to k8s from local machine.
+However, if this was a real task there should be a pipeline which do taht.
+Also, the pipe should contain logic to wait for the deployment to be up and running before proceeding with next steps for example.
+
+k8s related files are located in `k8s` dir.
+
+Prerequisite:
+- Get gcloud cli and authenticate it;
+- Install the follow gcloud component - gke-gcloud-auth-plugin; ( gcloud components install gke-gcloud-auth-plugin)
+1. Authenticate against the test-cluster. If you are following along:
+`gcloud container clusters get-credentials test-cluster --zone europe-west1-b`
+2. cd to `k8s` directory;
+3. Run `kubectl apply -f .` to deploy the app;
+4. You `kubetl port-forward` to access the deployment if needed;
+
+
+
 ---
 
 ## Go Ethereum

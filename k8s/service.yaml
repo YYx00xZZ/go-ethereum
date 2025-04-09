@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: geth-service
+  labels:
+    app: geth
+spec:
+  selector:
+    app: geth
+  type: ClusterIP # Internal access only for security reasons :) 
+  ports:
+    - name: rpc
+      protocol: TCP
+      port: 8545
+      targetPort: 8545
+    - name: ws
+      protocol: TCP
+      port: 8546
+      targetPort: 8546
+    - name: tcp
+      protocol: TCP
+      port: 30303
+      targetPort: 30303
+    - name: udp
+      protocol: UDP
+      port: 30303
+      targetPort: 30303
