@@ -7,7 +7,7 @@ on: [push, pull_request]
   #   paths: ["**"]
 
 jobs:
-  deploy:
+  deploy contract:
     # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
     runs-on: ubuntu-latest
 
@@ -80,6 +80,11 @@ jobs:
           docker push $IMAGE_NAME:with-contract-latest
           docker push $IMAGE_NAME:with-contract-$COMMIT_SHA
 
+  run tests:
+    # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
+    runs-on: ubuntu-latest
+    
+    steps:
       - name: start geth with contract
         run: |
           docker run -d --name geth-service-with-contract -p 8545:8545 -p 30303:30303 yyx00xzz/geth-dev:with-contract-latest --dev --http --http.addr 0.0.0.0 --http.port 8545 --http.api admin,debug,web3,eth,txpool,miner,net,dev --miner.gasprice "1" --http.corsdomain "*"
