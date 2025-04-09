@@ -104,4 +104,5 @@ jobs:
       - name: run tests
         run: |
           cd ./hardhat
+          npm install
           npx hardhat test --network geth
