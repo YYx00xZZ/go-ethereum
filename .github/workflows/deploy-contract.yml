@@ -7,7 +7,7 @@ on: [push, pull_request]
   #   paths: ["**"]
 
 jobs:
-  deploy contract:
+  deploy-contract:
     # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
     runs-on: ubuntu-latest
 
