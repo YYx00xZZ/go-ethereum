@@ -86,8 +86,8 @@ Required inputs:
 5. Open new terminal window and make sure you are in `infrastructure` dir;
 6. Run `terraform init`;
 7. Run `terraform plan` and revisit the plan output;
-8. Run `terraform apply`. Wait for the prompt or just add `-auto-approve` to automatically approve the action.
-
+8. Run `terraform apply`. Wait for the prompt or just add `-auto-approve` to automatically approve the action;
+9. Run `terraform destroy` after you are done with testing and messing around.
 ---
 
 ## Go Ethereum
