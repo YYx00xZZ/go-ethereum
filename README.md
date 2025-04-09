@@ -18,16 +18,12 @@ If you need to deploy the contract locally:
 1. cd to `hardhat` dir
 2. run `npx hardhat run scripts/deploy.ts --network geth`
 
----
-
 #### Creating new image containing the contract
 I've decided to go with mounted dir for the data dir because it is easier to create new dokcer image with the contract already deployed. If I've stayed on the volume mount, it would require more steps to persist the data dir.
 Using mounted dir for the data can be tricky because of permission errs tho.
 
 Currently, the new image (with contract) is built from the latest base image.
 This should be extended in the future to support building from a given tag.
-
----
 
 ### Tests
 The default tests that Hardhat Sample Project provides depends on using the Hardhat network.
@@ -82,6 +78,15 @@ To overcome this limitation I had to use zonal cluster with only 2 nodes.
 Required inputs:
 - `project_id`
 
+#### How to
+1. Go to GCP WEB UI > IAM & Admin > Service Accounts;
+2. Create new Service Account with name `terraformer` and assign Owner role (for production this should be limited role, never use owner);
+3. Create new service account key and download it as JSON;
+4. Put the key in `infrastructure/secrets` dir and name it `svc_acc_key.json`;
+5. Open new terminal window and make sure you are in `infrastructure` dir;
+6. Run `terraform init`;
+7. Run `terraform plan` and revisit the plan output;
+8. Run `terraform apply`. Wait for the prompt or just add `-auto-approve` to automatically approve the action.
 
 ---
 
