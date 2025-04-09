@@ -1,14 +1,14 @@
 name: deploy contract and run test
 
-on: [push, pull_request]
-  # pull_request:
-  #   types: [closed]
-  #   branches: [master]
-  #   paths: ["**"]
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+    paths: ["**"]
 
 jobs:
   deploy-contract:
-    # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
     runs-on: ubuntu-latest
 
     steps:
@@ -81,7 +81,7 @@ jobs:
           docker push $IMAGE_NAME:with-contract-$COMMIT_SHA
 
   run-tests:
-    # if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'CI:Deploy')
     runs-on: ubuntu-latest
     needs: deploy-contract
     
