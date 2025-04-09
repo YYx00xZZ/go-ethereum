@@ -106,7 +106,12 @@ Prerequisite:
 3. Run `kubectl apply -f .` to deploy the app;
 4. Use `kubectl port-forward` to access the deployment if needed;
 
+### Blockscout
+Everything is moved inside `docker-compose` dir.
 
+I've reused the configs from the official repo but added geth with my image (latest).
+When I search the address of the developer account that Geth creates by default I get a result.
+If I search the contract address after deploying it again I am getting a result.
 
 ---
 

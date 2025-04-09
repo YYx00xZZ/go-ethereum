@@ -79,3 +79,10 @@ hardhat/ignition/deployments/chain-31337
 infrastructure/secrets
 infrastructure/.terraform
 infrastructure/terraform.tfstate*
+
+# Blockscout related
+docker-compose/services/blockscout-db-data
+docker-compose/services/logs
+docker-compose/services/redis-data
+docker-compose/services/stats-db-data
+docker-compose/services/dets

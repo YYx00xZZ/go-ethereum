@@ -1,0 +1,134 @@
+version: '3.9'
+
+services:
+  geth:
+    image: yyx00xzz/geth-dev:latest
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+    command: >
+      --dev
+      --http
+      --http.addr 0.0.0.0
+      --http.port 8545
+      --http.api admin,debug,web3,eth,txpool,miner,net,dev
+      --miner.gasprice "1"
+      --http.corsdomain "*"
+    volumes:
+      - geth_data:/root/.ethereum
+
+  redis-db:
+    extends:
+      file: ./services/redis.yml
+      service: redis-db
+
+  db-init:
+    extends:
+      file: ./services/db.yml
+      service: db-init
+
+  db:
+    depends_on:
+      db-init:
+        condition: service_completed_successfully
+    extends:
+      file: ./services/db.yml
+      service: db
+
+  backend:
+    depends_on:
+      - db
+      - redis-db
+      - geth # Add geth as a dependency
+    extends:
+      file: ./services/backend.yml
+      service: backend
+    links:
+      - db:database
+      - geth:ethereum # Link to the geth service with alias 'ethereum'
+    environment:
+        ETHEREUM_JSONRPC_VARIANT: 'geth'
+        ETHEREUM_JSONRPC_HTTP_URL: 'http://localhost:8545' # Point to your geth service
+
+  visualizer:
+    extends:
+      file: ./services/visualizer.yml
+      service: visualizer
+
+  sig-provider:
+    extends:
+      file: ./services/sig-provider.yml
+      service: sig-provider
+
+  frontend:
+    depends_on:
+      - backend
+    extends:
+      file: ./services/frontend.yml
+      service: frontend
+
+  stats-db-init:
+    extends:
+      file: ./services/stats.yml
+      service: stats-db-init
+
+  stats-db:
+    depends_on:
+      stats-db-init:
+        condition: service_completed_successfully
+    extends:
+      file: ./services/stats.yml
+      service: stats-db
+
+  stats:
+    depends_on:
+      - stats-db
+      - backend
+    extends:
+      file: ./services/stats.yml
+      service: stats
+
+  user-ops-indexer:
+    depends_on:
+      - db
+      - backend
+    extends:
+      file: ./services/user-ops-indexer.yml
+      service: user-ops-indexer
+
+  proxy:
+    depends_on:
+      - backend
+      - frontend
+      - stats
+    ports:
+      - "4000:80" # Expose Blockscout UI on port 4000 (you can change this)
+    extends:
+      file: ./services/nginx.yml
+      service: proxy
+
+volumes:
+  geth_data:
+
+
+# version: '3.8'
+
+# services:
+#   geth:
+#     image: yyx00xzz/geth-dev:latest
+#     ports:
+#       - "8545:8545"
+#       - "30303:30303"
+#     command: >
+#       --dev
+#       --http
+#       --http.addr 0.0.0.0
+#       --http.port 8545
+#       --http.api admin,debug,web3,eth,txpool,miner,net,dev
+#       --miner.gasprice "1"
+#       --http.corsdomain "*"
+#     volumes:
+#       - geth_data:/root/.ethereum
+
+# volumes:
+#   geth_data:
