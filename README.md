@@ -104,7 +104,7 @@ Prerequisite:
 `gcloud container clusters get-credentials test-cluster --zone europe-west1-b`
 2. cd to `k8s` directory;
 3. Run `kubectl apply -f .` to deploy the app;
-4. You `kubetl port-forward` to access the deployment if needed;
+4. Use `kubectl port-forward` to access the deployment if needed;
 
 
 
