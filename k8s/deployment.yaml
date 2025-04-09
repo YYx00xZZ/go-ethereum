@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geth-deployment
+  labels:
+    app: geth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: geth
+  template:
+    metadata:
+      labels:
+        app: geth
+    spec:
+      containers:
+        - name: geth-node
+          image: yyx00xzz/geth-dev:with-contract-latest
+          ports:
+            - containerPort: 8545
+              name: rpc
+            - containerPort: 8546
+              name: ws
+            - containerPort: 30303
+              name: tcp
+              protocol: TCP
+            - containerPort: 30303
+              name: udp
+              protocol: UDP
+          # cli args for geth here if needed
+          command: ["geth", "--dev", "--http", "--http.addr", "0.0.0.0", "--http.port", "8545", "--http.api", "admin,debug,web3,eth,txpool,miner,net,dev", "--miner.gasprice", "1", "--http.corsdomain", "*"]
+          volumeMounts:
+            - name: geth-data
+              mountPath: /root/.ethereum
+
+      volumes:
+        - name: geth-data
+          persistentVolumeClaim:
+            claimName: geth-pvc
